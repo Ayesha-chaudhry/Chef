@@ -1,33 +1,44 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { NavigationContainer } from "@react-navigation/native"
-import Splash from '../screens/Splash'
-import Main from '../screens/Main'
-import Detail from '../screens/Detail'
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { useCallback } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font'
+import {FONT_SACRAMENTO} from '../../res/drawables'
 
-
-const Stack = createNativeStackNavigator()
+SplashScreen.preventAutoHideAsync
 
 const Navigation = () => {
+
+  let [fontsLoaded] = useFonts({
+    'Sacramento-Regular': FONT_SACRAMENTO
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null
+  }
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name='Splash'
-          component={Splash}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Main'
-          component={Main}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Detail'
-          component={Detail}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View  style={styles.mainContainer} onLayoutRootView={onLayoutRootView}>
+      <Text style={{ fontSize: 40, fontFamily: 'Sacramento-Regular'}}>
+        Hello world
+      </Text>
+    </View>
   )
 }
+
+
+const styles = StyleSheet.create({
+mainContainer:{
+  flex : 1,
+  justifyContent : 'center',
+  alignItems : 'center'
+}
+})
+
 
 export default Navigation

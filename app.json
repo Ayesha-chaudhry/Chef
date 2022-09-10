@@ -12,8 +12,7 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/fe94a93e-4a87-4450-aa16-893564d7cd6d"
+      "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
@@ -35,9 +34,6 @@
       "eas": {
         "projectId": "fe94a93e-4a87-4450-aa16-893564d7cd6d"
       }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
     }
   },
   "react-native-google-mobile-ads": {
